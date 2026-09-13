@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultar Estoque — Estoque TI</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app">
+    <header class="page-header">
+        <a class="voltar" href="index.html">← Início</a>
+        <h1>Consultar Estoque</h1>
+        <div class="stats" id="stats"></div>
+    </header>
+
+    <main>
+        <div class="toolbar">
+            <input type="text" id="busca" placeholder="Buscar produto...">
+            <select id="filtroCategoria">
+                <option value="">Todas as categorias</option>
+            </select>
+            <label class="toggle">
+                <input type="checkbox" id="apenasCriticos">
+                <span>Apenas críticos</span>
+            </label>
+        </div>
+
+        <div id="alerta" class="alerta oculto"></div>
+
+        <div class="tabela-wrap">
+            <table class="tabela-produtos">
+                <thead>
+                <tr>
+                    <th>Produto</th>
+                    <th>Categoria</th>
+                    <th>Nível de estoque / Mínimo</th>
+                    <th class="num">Valor unit.</th>
+                    <th class="num">Valor total</th>
+                    <th class="acoes-col"></th>
+                </tr>
+                </thead>
+                <tbody id="corpoTabela"></tbody>
+            </table>
+        </div>
+
+        <p id="vazio" class="vazio oculto">Nenhum produto encontrado.</p>
+    </main>
+</div>
+
+<!-- Modal: editar dados do produto (não altera quantidade) -->
+<div id="modalEditarOverlay" class="modal-overlay oculto">
+    <div class="modal">
+        <div class="modal-header">
+            <h2>Editar produto</h2>
+            <button type="button" id="btnFecharEditar" class="btn-icon" aria-label="Fechar">✕</button>
+        </div>
+        <form id="formEditar">
+            <input type="hidden" id="editarId">
+            <p class="info-linha">Estoque atual: <strong id="editarQuantidadeAtual"></strong> — ajuste em "Ajustar estoque"</p>
+            <label>Nome
+                <input type="text" id="editarNome" required maxlength="120">
+            </label>
+            <label>Categoria
+                <select id="editarCategoria" required></select>
+            </label>
+            <label id="editarBlocoNovaCategoria" class="oculto">Nome da nova categoria
+                <input type="text" id="editarNovaCategoria" maxlength="30" placeholder="ex: Webcam">
+            </label>
+            <label>Qtd. mínima
+                <input type="number" id="editarQuantidadeMinima" required min="0" step="1">
+            </label>
+            <label>Valor unitário (R$)
+                <input type="number" id="editarValorUnitario" required min="0" step="0.01">
+            </label>
+            <div class="modal-acoes">
+                <button type="button" id="btnCancelarEditar" class="btn-secundario">Cancelar</button>
+                <button type="submit" class="btn-primary">Salvar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal: ajustar estoque (entrada/saída via movimentação) -->
+<div id="modalMovimentarOverlay" class="modal-overlay oculto">
+    <div class="modal">
+        <div class="modal-header">
+            <h2>Ajustar estoque</h2>
+            <button type="button" id="btnFecharMovimentar" class="btn-icon" aria-label="Fechar">✕</button>
+        </div>
+        <form id="formMovimentar">
+            <input type="hidden" id="movimentarId">
+            <p class="info-linha" id="movimentarNome"></p>
+            <label>Tipo
+                <select id="movimentarTipo">
+                    <option value="entrada">Entrada</option>
+                    <option value="saida">Saída</option>
+                </select>
+            </label>
+            <label>Quantidade
+                <input type="number" id="movimentarQuantidade" required min="1" step="1">
+            </label>
+            <div class="modal-acoes">
+                <button type="button" id="btnCancelarMovimentar" class="btn-secundario">Cancelar</button>
+                <button type="submit" class="btn-primary">Registrar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="api.js"></script>
+<script src="estoque.js"></script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultar Histórico — Estoque TI</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app">
+    <header class="page-header">
+        <a class="voltar" href="index.html">← Início</a>
+        <h1>Consultar Histórico</h1>
+    </header>
+
+    <main>
+        <div class="toolbar">
+            <input type="text" id="busca" placeholder="Buscar por produto...">
+            <select id="filtroTipo">
+                <option value="">Todos os tipos</option>
+                <option value="entrada">Entrada</option>
+                <option value="saida">Saída</option>
+            </select>
+        </div>
+
+        <div id="alerta" class="alerta oculto"></div>
+
+        <div class="tabela-wrap">
+            <table class="tabela-produtos">
+                <thead>
+                <tr>
+                    <th>Data</th>
+                    <th>Produto</th>
+                    <th>Tipo</th>
+                    <th class="num">Quantidade</th>
+                </tr>
+                </thead>
+                <tbody id="corpoTabela"></tbody>
+            </table>
+        </div>
+
+        <p id="vazio" class="vazio oculto">Nenhuma movimentação encontrada.</p>
+    </main>
+</div>
+
+<script src="api.js"></script>
+<script src="historico.js"></script>
+</body>
+</html>

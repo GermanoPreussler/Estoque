@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adicionar Produto — Estoque TI</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app app-estreito">
+    <header class="page-header">
+        <a class="voltar" href="index.html">← Início</a>
+        <h1>Adicionar Produto</h1>
+    </header>
+
+    <main>
+        <div id="alerta" class="alerta oculto"></div>
+        <div id="sucesso" class="sucesso oculto"></div>
+
+        <form id="formProduto" class="form-card">
+            <label>Nome
+                <input type="text" id="campoNome" required maxlength="120">
+            </label>
+            <label>Categoria
+                <select id="campoCategoria" required>
+                    <option value="" disabled selected>Selecione uma categoria</option>
+                </select>
+            </label>
+            <label id="blocoNovaCategoria" class="oculto">Nome da nova categoria
+                <input type="text" id="campoNovaCategoria" maxlength="30" placeholder="ex: Webcam">
+            </label>
+            <div class="linha-dupla">
+                <label>Quantidade inicial
+                    <input type="number" id="campoQuantidade" required min="0" step="1">
+                </label>
+                <label>Qtd. mínima
+                    <input type="number" id="campoQuantidadeMinima" required min="0" step="1">
+                </label>
+            </div>
+            <label>Valor unitário (R$)
+                <input type="number" id="campoValorUnitario" required min="0" step="0.01">
+            </label>
+            <div class="modal-acoes">
+                <button type="submit" class="btn-primary">Cadastrar produto</button>
+            </div>
+        </form>
+    </main>
+</div>
+
+<script src="api.js"></script>
+<script src="adicionar.js"></script>
+</body>
+</html>
